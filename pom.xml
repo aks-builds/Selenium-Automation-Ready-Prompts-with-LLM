@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>selenium.automation</groupId>
+    <artifactId>Selenium-Automation-Ready-Prompts-With-LLM</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <selenium.version>4.33.0</selenium.version>
+        <testng.version>7.8.0</testng.version>
+        <webdrivermanager.version>5.6.2</webdrivermanager.version>
+        <slf4j.version>2.0.9</slf4j.version>
+        <logback.version>1.5.13</logback.version>
+        <cucumber.version>7.14.0</cucumber.version>
+        <openai.version>0.18.2</openai.version>
+        <jsoup.version>1.17.2</jsoup.version>
+    </properties>
+
+    <dependencies>
+        <!-- Selenium Java -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>${selenium.version}</version>
+        </dependency>
+
+        <!-- TestNG -->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-chrome-driver -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-chrome-driver</artifactId>
+            <version>4.33.0</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.seleniumhq.webdriver/webdriver-selenium -->
+        <dependency>
+            <groupId>org.seleniumhq.webdriver</groupId>
+            <artifactId>webdriver-selenium</artifactId>
+            <version>0.9.7376</version>
+        </dependency>
+
+        <!-- WebDriverManager -->
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>${webdrivermanager.version}</version>
+        </dependency>
+
+        <!-- SLF4J API -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+
+        <!-- Logback Implementation -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
+
+        <!-- Cucumber Dependencies -->
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>${cucumber.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-testng</artifactId>
+            <version>${cucumber.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-picocontainer</artifactId>
+            <version>${cucumber.version}</version>
+        </dependency>
+
+        <!-- Jsoup for HTML parsing -->
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>${jsoup.version}</version>
+        </dependency>
+
+        <!-- OpenAI Dependency -->
+        <dependency>
+            <groupId>com.theokanning.openai-gpt3-java</groupId>
+            <artifactId>service</artifactId>
+            <version>${openai.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20250517</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <source>17</source>
+                    <target>17</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.2</version>
+                <configuration>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>testng.xml</suiteXmlFile>
+                    </suiteXmlFiles>
+                    <systemPropertyVariables>
+                        <wdm.cachePath>${project.basedir}/.wdm</wdm.cachePath>
+                        <webdriver.chrome.silentOutput>true</webdriver.chrome.silentOutput>
+                        <webdriver.chrome.whitelistedIps></webdriver.chrome.whitelistedIps>
+                    </systemPropertyVariables>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>3.3.2</version>
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>${project.basedir}/.wdm</directory>
+                        </fileset>
+                    </filesets>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

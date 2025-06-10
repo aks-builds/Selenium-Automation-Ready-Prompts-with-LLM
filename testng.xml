@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Automation Framework Test Suite">
+    <test name="Chrome Tests">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="selenium.automation.runners.CucumberTestRunner"/>
+        </classes>
+    </test>
+</suite>
